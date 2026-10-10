@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Цветовые модели</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="preview-container">
+        <div class="palette-box">
+            <label for="colorPalette">Цветовая палитра</label><br>
+            <input type="color" id="colorPalette" style="width: 150px; height: 40px; cursor: pointer; margin-top: 5px;">
+        </div>
+        <div>Текущий цвет:</div>
+        <div id="colorBox"></div>
+    </div>
+    <div class="container">
+        <!--RGB-->
+        <div class="model-card" id="rgbCard">
+            <h3>RGB</h3>
+            <div class="control-group">
+                <label>Red (0-255)</label>
+                <div class="control-row">
+                    <input type="range" min="0" max="255" value="255" data-model="rgb" data-prop="r">
+                    <input type="number" min="0" max="255" value="255" data-model="rgb" data-prop="r">
+                </div>
+            </div>
+            <div class="control-group">
+                <label>Green (0-255)</label>
+                <div class="control-row">
+                    <input type="range" min="0" max="255" value="255" data-model="rgb" data-prop="g">
+                    <input type="number" min="0" max="255" value="255" data-model="rgb" data-prop="g">
+                </div>
+            </div>
+            <div class="control-group">
+                <label>Blue (0-255)</label>
+                <div class="control-row">
+                    <input type="range" min="0" max="255" value="255" data-model="rgb" data-prop="b">
+                    <input type="number" min="0" max="255" value="255" data-model="rgb" data-prop="b">
+                </div>
+            </div>
+        </div>
+        <!--CMYK-->
+        <div class="model-card" id="cmykCard">
+            <h3>CMYK</h3>
+            <div class="control-group">
+                <label>Cyan (0-100%)</label>
+                <div class="control-row">
+                    <input type="range" min="0" max="100" value="0" data-model="cmyk" data-prop="c">
+                    <input type="number" min="0" max="100" value="0" data-model="cmyk" data-prop="c">
+                </div>
+            </div>
+            <div class="control-group">
+                <label>Magenta (0-100%)</label>
+                <div class="control-row">
+                    <input type="range" min="0" max="100" value="0" data-model="cmyk" data-prop="m">
+                    <input type="number" min="0" max="100" value="0" data-model="cmyk" data-prop="m">
+                </div>
+            </div>
+            <div class="control-group">
+                <label>Yellow (0-100%)</label>
+                <div class="control-row">
+                    <input type="range" min="0" max="100" value="0" data-model="cmyk" data-prop="y">
+                    <input type="number" min="0" max="100" value="0" data-model="cmyk" data-prop="y">
+                </div>
+            </div>
+            <div class="control-group">
+                <label>Key/Black (0-100%)</label>
+                <div class="control-row">
+                    <input type="range" min="0" max="100" value="0" data-model="cmyk" data-prop="k">
+                    <input type="number" min="0" max="100" value="0" data-model="cmyk" data-prop="k">
+                </div>
+            </div>
+        </div>
+        <!--HLS-->
+        <div class="model-card" id="hlsCard">
+            <h3>HLS</h3>
+            <div class="control-group">
+                <label>Hue (0-360°)</label>
+                <div class="control-row">
+                    <input type="range" min="0" max="360" value="0" data-model="hls" data-prop="h">
+                    <input type="number" min="0" max="360" value="0" data-model="hls" data-prop="h">
+                </div>
+            </div>
+            <div class="control-group">
+                <label>Lightness (0-100%)</label>
+                <div class="control-row">
+                    <input type="range" min="0" max="100" value="100" data-model="hls" data-prop="l">
+                    <input type="number" min="0" max="100" value="100" data-model="hls" data-prop="l">
+                </div>
+            </div>
+            <div class="control-group">
+                <label>Saturation (0-100%)</label>
+                <div class="control-row">
+                    <input type="range" min="0" max="100" value="0" data-model="hls" data-prop="s">
+                    <input type="number" min="0" max="100" value="0" data-model="hls" data-prop="s">
+                </div>
+            </div>
+        </div>
+    </div> <!--container-->
+<script src="script.js"></script>
+</body>
+</html>
