@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segmentation and thresholding</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Сегментация и пороговая обработка</h1>
+
+    <!-- Загрузка изображения -->
+    <div class="controls">
+        <label><strong>Загрузить изображение:</strong> <input type="file" id="uploadImage" accept="image/*"></label>
+        <button id="loadDefaultBtn">Загрузить тестовое изображение</button>
+    </div>
+
+    <!-- Сегментация (точки, линии, перепады) -->
+    <div class="section">
+        <h2>Сегментация: точки, линии и перепады яркости</h2>
+        <div class="controls">
+            <button onclick="applyPointDetection()">Обнаружение точек</button>
+            <button onclick="applyLineDetection()">Обнаружение линий</button>
+            <button onclick="applyEdgeDetection()">Перепады яркости (Собель)</button>
+        </div>
+        <!-- Глобальный ползунок порога для сегментации -->
+        <div class="controls" style="background: #eef2f7; justify-content: space-between;">
+            <label style="width: 100%; display: flex; align-items: center; gap: 15px;">
+                <strong>Глобальный порог (T):</strong> 
+                <input type="range" id="globalThreshold" min="0" max="255" value="50" style="flex-grow: 1; cursor: pointer;">
+                <span id="thresholdVal" style="min-width: 35px; text-align: center; font-weight: bold; font-size: 16px;">50</span>
+            </label>
+        </div>
+        <div class="workspace">
+            <div class="canvas-box">
+                <h3>Результат сегментации</h3>
+                <canvas id="canvasResult1" width="300" height="300"></canvas>
+                <div class="description" id="desc1">Выберите метод выше</div>
+            </div>
+            <div class="canvas-box">
+                <h3>Исходное</h3>
+                <canvas id="canvasOriginal1" width="300" height="300"></canvas>
+            </div>
+        </div>
+
+    <!-- Глобальная пороговая обработка -->
+    <div class="section">
+        <h2>Глобальная пороговая обработка (Сравнение методов)</h2>
+        <div class="controls">
+            <button onclick="compareThresholds()">Выполнить сравнение (Отсу vs Итеративный)</button>
+        </div>
+        <div class="workspace">
+            <div class="canvas-box">
+                <h3>Метод Отсу</h3>
+                <canvas id="canvasOtsu" width="300" height="300"></canvas>
+                <div class="description" id="descOtsu">Автоматический выбор порога по максимизации межклассовой дисперсии.</div>
+            </div>
+            <div class="canvas-box">
+                <h3>Итеративный метод</h3>
+                <canvas id="canvasIter" width="300" height="300"></canvas>
+                <div class="description" id="descIter">Уточнение порога через средние значения двух классов.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
