@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raster algorithms</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar with params -->
+        <aside class="control-panel">
+            <h2>Rasterization</h2>
+
+            <div class="control-group">
+                <label for="algorithmSelect">Выберите алгоритм:</label>
+                <select id="algorithmSelect">
+                    <option value="stepwise">1. Пошаговый алгоритм (отрезок)</option>
+                    <option value="dda">2. Алгоритм ЦДА (отрезок)</option>
+                    <option value="bresenham-line">3. Алгоритм Брезенхема (отрезок)</option>
+                    <option value="bresenham-circle">4. Алгоритм Брезенхема (окружность)</option>
+                    <option value="castle-pitway">5. Алгоритм Кастла-Питвея (отрезок)</option>
+                    <option value="wu-line">6. Алгоритм Ву (сглаженный отрезок)</option>
+                </select>
+            </div>
+
+            <!-- Segment params -->
+            <div id="lineParams" class="params-section">
+                <div class="input-row">
+                    <label>Начало (X1, Y1):</label>
+                    <input type="number" id="x1" value="2" style="width: 70px;">
+                    <input type="number" id="y1" value="2" style="width: 70px;">
+                </div>
+                <div class="input-row">
+                    <label>Конец (X2, Y2):</label>
+                    <input type="number" id="x2" value="20" style="width: 70px;">
+                    <input type="number" id="y2" value="10" style="width: 70px;">
+                </div>
+            </div>
+
+            <!-- Circle params -->
+            <div id="circleParams" class="params-section" style="display: none;">
+                <div class="input-row">
+                    <label>Центр (X0, Y0):</label>
+                    <input type="number" id="cx" value="15" style="width: 70px;">
+                    <input type="number" id="cy" value="15" style="width: 70px;">
+                </div>
+                <div class="input-row">
+                    <label>Радиус (R):</label>
+                    <input type="number" id="radius" value="10" style="width: 100px;" min="1">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="gridScale">Масштаб сетки (px/cell): <span id="scaleValue">25</span></label>
+                <input type="range" id="gridScale" min="4" max="100" value="25">
+            </div>
+
+            <button id="drawBtn" class="btn primary">Запустить алгоритм</button>
+
+            <!-- Perf -->
+            <div class="metrics-card">
+                <h3>Метрики выполнения</h3>
+                <p>Время выполнения: <span id="execTime" class="highlight">0.00</span> мс</p>
+                <p>Пикселей построено: <span id="pixelCount" class="highlight">0</span></p>
+            </div>
+        </aside>
+
+        <!-- Canvas and logs -->
+        <main class="workspace">
+            <div class="canvas-container">
+                <canvas id="rasterCanvas"></canvas>
+            </div>
+
+            <div class="log-container">
+                <h3>Пошаговые вычисления и лог алгоритма</h3>
+                <div id="computationLog" class="log-box">
+                    Выберите алгоритм и нажмите «Запустить алгоритм»...
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
