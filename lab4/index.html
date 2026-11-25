@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Segment clipping studio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <h1>Segment clipping studio</h1>
+      </div>
+      <div class="topbar-actions">
+        <label class="btn btn-secondary file-label" for="fileInput">
+          Load input file
+        </label>
+        <input type="file" id="fileInput" accept=".txt,.dat,.csv,text/*" hidden />
+        <button type="button" class="btn btn-secondary" id="loadSampleBtn">
+          Load preset
+        </button>
+        <button type="button" class="btn btn-primary" id="applyBtn">
+          Clip segments
+        </button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="canvas-panel">
+        <div class="canvas-toolbar">
+          <div class="legend">
+            <span class="legend-item">
+              <i class="swatch swatch-window"></i> Clipping boundary
+            </span>
+            <span class="legend-item">
+              <i class="swatch swatch-raw"></i> Original segments
+            </span>
+            <span class="legend-item">
+              <i class="swatch swatch-clipped"></i> Visible result
+            </span>
+          </div>
+          <div class="view-controls">
+            <button type="button" class="btn btn-ghost" id="zoomInBtn" title="Zoom in">+</button>
+            <button type="button" class="btn btn-ghost" id="zoomOutBtn" title="Zoom out">−</button>
+            <button type="button" class="btn btn-ghost" id="fitViewBtn" title="Fit to view">
+              Fit
+            </button>
+          </div>
+        </div>
+
+        <div class="canvas-wrapper" id="canvasWrapper">
+          <canvas id="sceneCanvas"></canvas>
+          <div class="coords-hud" id="coordsHud">x: 0.00, y: 0.00</div>
+        </div>
+      </section>
+
+      <aside class="inspector-panel">
+        <div class="card">
+          <h2>Clipping algorithm</h2>
+          <div class="mode-switch" role="tablist">
+            <button
+              type="button"
+              class="mode-btn active"
+              data-mode="liang-barsky"
+              id="modeLiangBarsky"
+            >
+              Liang–Barsky (rect)
+            </button>
+            <button
+              type="button"
+              class="mode-btn"
+              data-mode="cyrus-beck"
+              id="modeCyrusBeck"
+            >
+              Cyrus–Beck (convex)
+            </button>
+          </div>
+        </div>
+
+        <div class="card" id="rectCard">
+          <h2>Rectangle bounds</h2>
+          <div class="grid-2">
+            <label class="field">
+              <span>Xmin</span>
+              <input type="number" step="any" id="xminInput" value="2" />
+            </label>
+            <label class="field">
+              <span>Ymin</span>
+              <input type="number" step="any" id="yminInput" value="1" />
+            </label>
+            <label class="field">
+              <span>Xmax</span>
+              <input type="number" step="any" id="xmaxInput" value="8" />
+            </label>
+            <label class="field">
+              <span>Ymax</span>
+              <input type="number" step="any" id="ymaxInput" value="6" />
+            </label>
+          </div>
+        </div>
+
+        <div class="card hidden" id="polygonCard">
+          <div class="card-head">
+            <h2>Convex polygon vertices</h2>
+            <button type="button" class="btn btn-ghost btn-sm" id="addVertexBtn">
+              + Vertex
+            </button>
+          </div>
+          <p class="field-note">Ordered around the boundary (auto-oriented counter-clockwise).</p>
+          <div class="vertex-list" id="vertexList"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h2>Segments &amp; input data</h2>
+            <button type="button" class="btn btn-ghost btn-sm" id="addSegmentBtn">
+              + Segment
+            </button>
+          </div>
+          <div class="segment-list" id="segmentList"></div>
+
+          <div class="raw-input-block">
+            <label class="field" for="rawDataInput">
+              <span>Text input format (n, segments, bounds, optional m &amp; vertices)</span>
+              <textarea id="rawDataInput" rows="7" spellcheck="false"></textarea>
+            </label>
+            <div class="raw-actions">
+              <button type="button" class="btn btn-secondary btn-sm" id="parseTextBtn">
+                Parse text
+              </button>
+              <button type="button" class="btn btn-ghost btn-sm" id="syncTextBtn">
+                Sync to text
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
